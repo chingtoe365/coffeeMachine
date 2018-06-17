@@ -1,0 +1,32 @@
+﻿extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p#last-order Last order
+    span#last-order-updated  updated
+  form(action="/submit-form-with-post", method="post")
+    p Drink : #{order.drink} Sugar Amount: #{order.sugarQty} Use Own Mug: #{order.ownMug} 
+    input(type="hidden", name="drink", value=order.drink)
+    input(type="hidden", name="sugarAmount", value=order.sugarQty)
+    input(type="hidden", name="ownMug", value=order.ownMug)
+    input(id="repeat-order" name="submit" type="submit" value="Buy It Again")
+  h2 Place your order
+  form(action="/submit-form-with-post", method="post")
+    p Drink
+    input(type="radio", name="drink", value="tea" checked)
+    label Tea
+    input(type="radio", name="drink", value="chocolate")
+    label Chocolate
+    input(type="radio", name="drink", value="coffee")
+    label Coffee 
+    p Sugar Amount
+    input(type="text", name="sugarAmount", placeholder="5")
+    p Use your own mug
+    input(type="radio", name="ownMug", value="1" checked)
+    label Yes
+    input(type="radio", name="ownMug", value="0")
+    label No
+    p
+    input(type="submit", name="submit", value="Place Order")
+

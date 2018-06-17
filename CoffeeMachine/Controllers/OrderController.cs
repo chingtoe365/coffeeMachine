@@ -1,4 +1,5 @@
-﻿using CoffeeMachine.Models;
+﻿using CoffeeMachine.Models.Exceptions;
+using CoffeeMachine.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,20 +14,52 @@ namespace CoffeeMachine.Controllers
 {
     public class OrderController : ApiController
     {
+        /* 
+        * Get request will fetch last order detail
+        */
+
         // GET: api/Order
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get()
         {
-            return new string[] { "coffee", "tea", "chocolate" };
+            try
+            {
+                OrderLogger orderLogger = new OrderLogger(new OrderDetails());
+                OrderDetails lastOrder = orderLogger.GetLastOrder();
+                return Request.CreateResponse(HttpStatusCode.OK, lastOrder);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex);
+            }
+            //return Request.CreateResponse(HttpStatusCode.OK, "hello world");
         }
 
-        // GET: api/Order/tea/2/true
+        // POST: api/Order/
         public HttpResponseMessage Post([FromBody] OrderDetails orderDetail)
         {
             try
             {
+                if (!orderDetail.GetAllDrinkOptions().Contains(orderDetail.Drink))
+                {
+                    throw new DrinkOutOfRangeException();
+                }
+                if(orderDetail.OwnMug != 1 && orderDetail.OwnMug != 0)
+                {
+                    throw new OwnMugOutOfRangeException();
+                }
+                //if(orderDetail.SugarAmount)
+                try
+                {
+                    int sugarQty = Convert.ToInt32(orderDetail.SugarAmount);
+                }
+                catch(Exception ex)
+                {
+                    throw new SugarAmountTypeErrorException();
+                }
+                //var sugarQty = (int) orderDetail.SugarAmount;
                 int orderId = orderDetail.InsertOrder();
                 orderDetail.Id = orderId;
-                OrderLogger orderLogger = new OrderLogger(orderId);
+                OrderLogger orderLogger = new OrderLogger(orderDetail);
                 orderLogger.UpdateLogger();
                 var message = Request.CreateResponse(HttpStatusCode.Created, orderDetail);
                 return message;
@@ -35,6 +68,7 @@ namespace CoffeeMachine.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
+
             
         }
 

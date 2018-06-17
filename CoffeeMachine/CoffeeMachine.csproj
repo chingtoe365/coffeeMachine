@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -112,9 +113,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database.cs" />
-    <Compile Include="Models\OrderDetails.cs" />
-    <Compile Include="Models\OrderLogger.cs" />
+    <Compile Include="Models\Connection\Database.cs" />
+    <Compile Include="Models\Constants\WebConstants.cs" />
+    <Compile Include="Models\Exceptions\DrinkOutOfRangeException.cs" />
+    <Compile Include="Models\Exceptions\OwnMugOutOfRangeException.cs" />
+    <Compile Include="Models\Exceptions\SugarAmountTypeErrorException.cs" />
+    <Compile Include="Models\Interfaces\IOrderBase.cs" />
+    <Compile Include="Models\Interfaces\IOrderDetails.cs" />
+    <Compile Include="Models\Interfaces\IOrderLogger.cs" />
+    <Compile Include="Models\Services\OrderDetails.cs" />
+    <Compile Include="Models\Services\OrderLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
