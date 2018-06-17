@@ -6,7 +6,7 @@
  **/
 
 
-Solution overview
+/ * Solution overview */
 
 This solution contains three projects - REST API service, integration test, and a client app, with the correspondence to the folders as follows
 
@@ -14,7 +14,12 @@ API - CoffeeMachine
 Test - CoffeeMachineUnitTest
 Client - CoffeeMachineCli
 
-API and integration test can be run standalone.
+API and integration test can be run standalone, as they use different db separately where the db files locates in their root dir.
 
-Client app is written in Node.JS not it's standlone, so whenever you need to start it, API should be launched beforehand, you can change via "Set startup project" when you right-click the solution in solution explorer.
+Client app is not standlone, so whenever you need to start it, API should be launched beforehand, you can change via "Set startup project" when you right-click the solution in solution explorer.
 
+/ * Technology */
+API - C#/.NET WCF service
+DB - SQLlite3
+Test - VB built-in test tools
+Client - Node.JS
