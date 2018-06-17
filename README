@@ -8,7 +8,11 @@
 
 Solution overview
 
-This solution contains three projects - REST API service, integration test, and a client app.
+This solution contains three projects - REST API service, integration test, and a client app, with the correspondence to the folders as follows
+
+API - CoffeeMachine
+Test - CoffeeMachineUnitTest
+Client - CoffeeMachineCli
 
 API and integration test can be run standalone.
 
