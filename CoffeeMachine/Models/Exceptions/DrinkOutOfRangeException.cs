@@ -1,7 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿/*
+ * This class handles the exception error
+ * caused by incorrect drink type input.
+ * 
+ * Only three drink options available (case sensitive)
+ * - coffee - chocolate - tea
+ * 
+ **/
+
+using System;
 
 namespace CoffeeMachine.Models.Exceptions
 {

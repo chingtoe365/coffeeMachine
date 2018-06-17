@@ -1,4 +1,12 @@
-﻿using CoffeeMachine.Models.Exceptions;
+﻿/*
+ * Main controller of the API
+ * Two endpoints to
+ * a) insert and record new order
+ * b) fetch last order from db
+ * 
+ **/
+
+using CoffeeMachine.Models.Exceptions;
 using CoffeeMachine.Models.Services;
 using System;
 using System.Collections.Generic;
@@ -17,7 +25,6 @@ namespace CoffeeMachine.Controllers
         /* 
         * Get request will fetch last order detail
         */
-
         // GET: api/Order
         public HttpResponseMessage Get()
         {
@@ -31,9 +38,14 @@ namespace CoffeeMachine.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex);
             }
-            //return Request.CreateResponse(HttpStatusCode.OK, "hello world");
         }
 
+        /*
+         * Post request will insert order to db 
+         * comprising information of type of drink, sugar amount 
+         * and using your own mug or not
+         * 
+         * */
         // POST: api/Order/
         public HttpResponseMessage Post([FromBody] OrderDetails orderDetail)
         {
@@ -43,20 +55,18 @@ namespace CoffeeMachine.Controllers
                 {
                     throw new DrinkOutOfRangeException();
                 }
-                if(orderDetail.OwnMug != 1 && orderDetail.OwnMug != 0)
+                if (orderDetail.OwnMug != 1 && orderDetail.OwnMug != 0)
                 {
                     throw new OwnMugOutOfRangeException();
                 }
-                //if(orderDetail.SugarAmount)
                 try
                 {
                     int sugarQty = Convert.ToInt32(orderDetail.SugarAmount);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw new SugarAmountTypeErrorException();
                 }
-                //var sugarQty = (int) orderDetail.SugarAmount;
                 int orderId = orderDetail.InsertOrder();
                 orderDetail.Id = orderId;
                 OrderLogger orderLogger = new OrderLogger(orderDetail);
@@ -69,11 +79,11 @@ namespace CoffeeMachine.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
 
-            
+
         }
 
 
-        
-        
+
+
     }
 }

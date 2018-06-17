@@ -1,8 +1,14 @@
-﻿using System;
+﻿/*
+ * A class to handle interactions with db
+ * 
+ * DB file with name sqlite3.db is placed under project root dir by default
+ * 
+ * */
+
+using System;
 using System.Data.SQLite;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Web.UI.WebControls.WebParts;
 
 namespace CoffeeMachine.Models.Connection
 {
@@ -10,6 +16,8 @@ namespace CoffeeMachine.Models.Connection
     {
         public SQLiteConnection Connection;
 
+        // constructor
+        // TODO: refactor connection string to make the edit of it easy
         public Database()
         {
             string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.

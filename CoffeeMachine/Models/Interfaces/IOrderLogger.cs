@@ -1,9 +1,9 @@
-﻿using CoffeeMachine.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Interface for OrderLogger class
+ * 
+ **/
+
+using CoffeeMachine.Models.Services;
 
 namespace CoffeeMachine.Models.Interfaces
 {

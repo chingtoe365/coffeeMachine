@@ -1,8 +1,11 @@
-﻿using System.Net;
+﻿/*
+ * Integratoin test for all API endpionts 
+ * 
+ **/
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CoffeeMachine.Controllers;
-using CoffeeMachine.Models.Exceptions;
 using CoffeeMachine.Models.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

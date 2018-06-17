@@ -1,5 +1,5 @@
 ﻿/*
- * GET home page.
+ * Home page.
  */
 import express = require('express');
 import { Response } from '_debugger';
@@ -35,6 +35,7 @@ var getOptions = {
     method: 'GET'
 }
 
+// Home page default router
 router.get('/', (req: express.Request, res: express.Response) => {
     var updated = false;
     if (req.query.updated) {
@@ -52,6 +53,7 @@ router.get('/', (req: express.Request, res: express.Response) => {
     });
 });
 
+// Router to hanlde post request from form submission 
 router.post('/submit-form-with-post', urlencodedParser, function(req, res){
     var postData = querystring.stringify({ 'Drink': req.body.drink, 'SugarAmount': req.body.sugarAmount, 'OwnMug': req.body.ownMug });
     var options = {
@@ -68,6 +70,7 @@ router.post('/submit-form-with-post', urlencodedParser, function(req, res){
         resp.on('data', (d) => {
             process.stdout.write(d);
         });
+        // wait until the http request ends and then redirect to default home page 
         resp.on('end', (e) => {
             return res.redirect('/?updated=true');
         })

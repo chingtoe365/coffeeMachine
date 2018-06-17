@@ -1,12 +1,14 @@
-﻿using CoffeeMachine.Models.Connection;
+﻿/*
+ * A class for order logger used to record the last order
+ * Only the first and only record in the OrderLogger table is updated
+ * It handles the operation of fetching and updating the last order
+ * 
+ * */
+
+using CoffeeMachine.Models.Connection;
 using CoffeeMachine.Models.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.SQLite;
-using System.Linq;
-using System.ServiceModel;
-using System.Web;
 
 namespace CoffeeMachine.Models.Services
 {
@@ -18,6 +20,7 @@ namespace CoffeeMachine.Models.Services
         public string SugarAmount { get; set; }
         public int OwnMug { get; set; }
 
+        // constructor
         public OrderLogger(OrderDetails orderDetails)
         {
             this.Id = 1;
@@ -27,6 +30,12 @@ namespace CoffeeMachine.Models.Services
             this.OwnMug = orderDetails.OwnMug;
         }
 
+        /*
+         *  This function is to update order logger 
+         *  everytime new order is made
+         *  to sync with the new order made 
+         *  
+         */
         public void UpdateLogger()
         {
             try
@@ -55,6 +64,7 @@ namespace CoffeeMachine.Models.Services
             
         }
 
+        // This function fetch the last order 
         public OrderDetails GetLastOrder()
         {
             OrderDetails orderDetail = new OrderDetails();
@@ -87,3 +97,4 @@ namespace CoffeeMachine.Models.Services
         }
     }
 }
+ 

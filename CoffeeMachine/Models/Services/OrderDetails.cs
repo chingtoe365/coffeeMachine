@@ -1,21 +1,25 @@
-﻿using CoffeeMachine.Models.Connection;
-using CoffeeMachine.Models.Exceptions;
+﻿/*
+ * A class for order detail consisting fields like
+ *  - type of drink
+ *  - sugar amount
+ *  - use of your own mug or not 
+ * for each order requested.
+ * 
+ * It handles the operation of fetching and inserting orders,
+ * and also recalling Id of last operation
+ * 
+ * */
+
+using CoffeeMachine.Models.Connection;
 using CoffeeMachine.Models.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.SQLite;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
-using System.Web;
 
 namespace CoffeeMachine.Models.Services
 {
     public class OrderDetails : IOrderDetails
     {
-        private readonly string[] _allowedDrink = {"coffee", "tea", "chocolate"};
+        private readonly string[] _allowedDrink = { "coffee", "tea", "chocolate" };
 
         public int Id { get; set; }
         public string Drink { get; set; }
@@ -24,7 +28,7 @@ namespace CoffeeMachine.Models.Services
 
         public OrderDetails()
         {
-            //var check = this.SugarAmount;
+            // constructor
         }
 
         public OrderDetails(string drink, string sugarAmount, int ownMug)
@@ -34,19 +38,8 @@ namespace CoffeeMachine.Models.Services
             OwnMug = ownMug;
         }
 
-        //public OrderDetails(string Drink, int SugarAmount, int OwnMug)
-        //{
-        //    string type = SugarAmount.GetType().ToString();
-        //    if (!type.Equals("Integer"))
-        //    {
-        //        throw new Exception("Sugar amount not right");
-        //    }
-        //}
-
-        /**
-        * INSERT RECORD INTO DATABASE
-        * *
-        */
+        
+        // Main function to insert order
         public int InsertOrder()
         {
             try
@@ -109,7 +102,6 @@ namespace CoffeeMachine.Models.Services
         private int RecallLastOrderId(Database db)
         {
             string lastId;
-            //var id = (int) lastId;
             try
             {
                 var query = "SELECT last_insert_rowid() FROM OrderHistory;";
