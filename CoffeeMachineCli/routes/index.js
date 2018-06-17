@@ -6,8 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var router = express.Router();
 var http = require('http');
-//var request = require('request');
 var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var querystring = require('querystring');
 function getJSON(getOptions, callback) {
     http.request(getOptions, function (res) {
         var body = '';
@@ -31,32 +32,23 @@ var getOptions = {
     method: 'GET'
 };
 router.get('/', function (req, res) {
-    console.log(res);
+    var updated = false;
+    if (req.query.updated) {
+        updated = req.query.updated;
+    }
     getJSON(getOptions, function (err, result) {
         if (err) {
             return console.log('Error while trying get order logs: ', err);
         }
         res.render('index', {
             title: 'Coffee Star',
-            order: result
+            order: result,
+            updated: updated
         });
     });
 });
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var querystring = require('querystring');
 router.post('/submit-form-with-post', urlencodedParser, function (req, res) {
-    // insert order and redirect to fire get-last-order get request
-    //function callback(err) {
-    //    if (err) {
-    //        return console.log('Error while trying post new order: ', err);
-    //    }
-    //    return res.redirect('/');
-    //}
-    //function showUpdateTagCallBack() {
-    //    res.
-    //}
     var postData = querystring.stringify({ 'Drink': req.body.drink, 'SugarAmount': req.body.sugarAmount, 'OwnMug': req.body.ownMug });
-    //console.log(postData);
     var options = {
         hostname: 'localhost',
         port: 62431,
@@ -68,17 +60,11 @@ router.post('/submit-form-with-post', urlencodedParser, function (req, res) {
         }
     };
     var postReq = http.request(options, function (resp) {
-        //console.log('statusCode:', resp.statusCode);
-        //console.log('headers:', resp.headers);
         resp.on('data', function (d) {
             process.stdout.write(d);
         });
         resp.on('end', function (e) {
-            //res.on('finish', function () {
-            //    showUpdateTagCallBack();
-            //});
-            return res.redirect('/');
-            //return callback(null);
+            return res.redirect('/?updated=true');
         });
     });
     postReq.on('error', function (e) {
@@ -87,7 +73,6 @@ router.post('/submit-form-with-post', urlencodedParser, function (req, res) {
     });
     postReq.write(postData);
     postReq.end();
-    //return res.redirect('/');
 });
 exports.default = router;
 //# sourceMappingURL=index.js.map

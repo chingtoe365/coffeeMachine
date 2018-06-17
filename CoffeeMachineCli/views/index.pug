@@ -3,10 +3,12 @@
 block content
   h1= title
   p Welcome to #{title}
-  p#last-order Last order
-    span#last-order-updated  updated
+  p#last-order Last order: 
+    if updated
+      span#last-order-updated updated
+    else
   form(action="/submit-form-with-post", method="post")
-    p Drink : #{order.drink} Sugar Amount: #{order.sugarQty} Use Own Mug: #{order.ownMug} 
+    p <b>Drink</b>: #{order.drink} <b>Sugar Amount</b>: #{order.sugarQty} <b>Use Own Mug</b>: #{order.ownMug == 1 ? "yes" : "no"}
     input(type="hidden", name="drink", value=order.drink)
     input(type="hidden", name="sugarAmount", value=order.sugarQty)
     input(type="hidden", name="ownMug", value=order.ownMug)
