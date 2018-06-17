@@ -1,0 +1,16 @@
+/*
+ * User manual of Coffee machine API, integration test, and client
+ * @author Jintao Long<longjintao1990@gmail.com>
+ * @last modified June 17th 2018
+ *
+ **/
+
+
+Solution overview
+
+This solution contains three projects - REST API service, integration test, and a client app.
+
+API and integration test can be run standalone.
+
+Client app is written in Node.JS not it's standlone, so whenever you need to start it, API should be launched beforehand, you can change via "Set startup project" when you right-click the solution in solution explorer.
+
