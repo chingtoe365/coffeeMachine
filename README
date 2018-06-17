@@ -1,5 +1,6 @@
 /*
- * User manual of Coffee machine API, integration test, and client
+ * Brief introduction 
+ * Coffee machine API, integration test, and coffee vendor client
  * @author Jintao Long<longjintao1990@gmail.com>
  * @last modified June 17th 2018
  *
@@ -14,11 +15,12 @@ API - CoffeeMachine
 Test - CoffeeMachineUnitTest
 Client - CoffeeMachineCli
 
-API and integration test can be run standalone, as they use different db separately where the db files locates in their root dir.
+API and integration test can be run standalone, as they read and write different DBs where the DB files locates in their own root dir separately.
 
-Client app is not standlone, so whenever you need to start it, API should be launched beforehand, you can change via "Set startup project" when you right-click the solution in solution explorer.
+Client app cannot be run standlone and API should be launched beforehand. In Visual Studio, you can change via "Set startup project" when you right-click the solution in solution explorer.
 
-/ * Technology */
+/ * Technologies */
+
 API - C#/.NET WCF service
 DB - SQLlite3
 Test - VB built-in test tools
