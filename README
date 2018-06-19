@@ -25,3 +25,17 @@ API - C#/.NET WCF service
 DB - SQLlite3
 Test - VB built-in test tools
 Client - Node.JS
+
+/* API usage */
+
+Once API service is up and running, the following endpoints are available:
+
+a) Get last order detail
+
+curl -X GET http://localhost:62431/api/Order
+
+b) Place new order and verify by step a) again
+
+curl -H "Content-Type: application/json" -d "{\"Drink\": \"coffee\", \"SugarAmount\": \"20\", \"OwnMug\": \"1\"}" -X POST http://localhost:62431/api/Order
+
+curl -X GET http://localhost:62431/api/Order

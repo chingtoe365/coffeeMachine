@@ -67,7 +67,7 @@ namespace CoffeeMachine.Models.Services
         // This function fetch the last order 
         public OrderDetails GetLastOrder()
         {
-            OrderDetails orderDetail = new OrderDetails();
+            OrderDetails orderDetail = new OrderDetails("cofffee", "21", 1);
             try
             {
                 using (Database db = new Database())

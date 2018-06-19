@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /*
- * GET home page.
+ * Home page.
  */
 var express = require("express");
 var router = express.Router();
@@ -31,6 +31,7 @@ var getOptions = {
     path: '/api/Order',
     method: 'GET'
 };
+// Home page default router
 router.get('/', function (req, res) {
     var updated = false;
     if (req.query.updated) {
@@ -47,6 +48,7 @@ router.get('/', function (req, res) {
         });
     });
 });
+// Router to hanlde post request from form submission 
 router.post('/submit-form-with-post', urlencodedParser, function (req, res) {
     var postData = querystring.stringify({ 'Drink': req.body.drink, 'SugarAmount': req.body.sugarAmount, 'OwnMug': req.body.ownMug });
     var options = {
@@ -63,6 +65,7 @@ router.post('/submit-form-with-post', urlencodedParser, function (req, res) {
         resp.on('data', function (d) {
             process.stdout.write(d);
         });
+        // wait until the http request ends and then redirect to default home page 
         resp.on('end', function (e) {
             return res.redirect('/?updated=true');
         });

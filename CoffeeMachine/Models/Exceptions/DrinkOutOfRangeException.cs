@@ -13,7 +13,7 @@ namespace CoffeeMachine.Models.Exceptions
 {
     public class DrinkOutOfRangeException : Exception
     {
-        private string _errorMessage = "Not valid Drink type (coffer/tea/chocolate)";
+        private string _errorMessage = "Not valid Drink type (coffee/tea/chocolate)";
         public override string Message
         {
             get

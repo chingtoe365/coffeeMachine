@@ -26,11 +26,13 @@ namespace CoffeeMachine.Models.Services
         public string SugarAmount { get; set; }
         public int OwnMug { get; set; }
 
+        // constructor
         public OrderDetails()
         {
-            // constructor
-        }
 
+        }
+    
+        // overload
         public OrderDetails(string drink, string sugarAmount, int ownMug)
         {
             Drink = drink;
@@ -69,7 +71,7 @@ namespace CoffeeMachine.Models.Services
 
         public OrderDetails GetOrderById(int id)
         {
-            OrderDetails orderDetail = new OrderDetails();
+            OrderDetails orderDetail = new OrderDetails("coffee", "11", 1);
             try
             {
                 using (var db = new Database())
