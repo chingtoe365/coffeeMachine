@@ -21,7 +21,7 @@ Client app cannot be run standlone and API should be launched beforehand. In Vis
 
 / * Technologies */
 
-API - C#/.NET WCF service
+..*API - C#/.NET WCF service
 DB - SQLlite3
 Test - VB built-in test tools
 Client - Node.JS
